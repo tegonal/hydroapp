@@ -1,0 +1,221 @@
+@link-color: #008282;
+@bg-color: #fff;
+@top-bgcolor: #333;
+
+body {
+  background: #fff;
+  font-family: "Helvetica Neue", "Helvetica", sans-serif;
+  font-weight: normal;
+  color: @top-bgcolor;
+  -webkit-font-smoothing: antialiased;
+}
+
+.top-bar {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: @top-bgcolor;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.search-form {
+  float: left;
+  padding: 30px;
+}
+
+#login-form {
+  float: left;
+  padding: 30px;
+}
+
+#signup-button {
+  margin-left: 25px;
+}
+
+#messages {
+  float: left;
+  padding: 30px;
+  color: #fff;
+  line-height: 32px;
+}
+
+.logged-in {
+  float: left;
+  padding: 30px;
+}
+
+.logged-in .username {
+  float: left;
+  color: #fff;
+  line-height: 32px;
+}
+
+.logged-in a {
+  float: left;
+  margin-left: 5px;
+  color: #000;
+}
+
+.logged-in .user-thumbnail {
+  float: left;
+  margin: -4px 5px;
+}
+
+.img-thumbnail {
+  margin: 5px;
+  padding: 4px;
+  background-color: @top-bgcolor;
+  border: 1px solid @link-color;
+  border-radius: 4px;
+}
+
+.top-logo {
+  float: right;
+  height: 72px;
+  width: 173px;
+  margin: 12px;
+  background-image: url(/assets/images/tegonal_logo_klein.png);
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+#main-container {
+  padding: 108px 10px 10px;
+}
+
+#station-container {
+  position: fixed;
+  float: left;
+  border: 1px solid #ddd;
+  width: 524px;
+  min-height: 100px;
+  margin: 5px 330px;
+  padding: 5px 10px 5px;
+  -webkit-border-radius: 4px;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+#chart-container {
+  position: fixed;
+  float: left;
+  border: 1px solid #ddd;
+  width: 524px;
+  min-height: 250px;
+  margin: 411px 330px;
+  padding: 5px 10px 5px;
+  -webkit-border-radius: 4px;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+#station-lists {
+  float: left;
+}
+
+li a {
+  display: block;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  width: 300px;
+  padding: 0px 5px 0px;
+}
+
+ul .station-element {
+  border: 1px solid #ddd;
+  margin: 5px 0;
+  padding: 5px 10px 5px;
+  -webkit-border-radius: 4px;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  position: relative;
+}
+
+.fav-off {
+  display: block;
+  float: right;
+  width: 19px;
+  heigth: 17px;
+  margin-top: -20px;
+  background-image: url(/assets/images/fav_off.png);
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.fav-on {
+  display: block;
+  float: right;
+  width: 19px;
+  heigth: 17px;
+  margin-top: -20px;
+  background-image: url(/assets/images/fav_on.png);
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.station {
+  float: left;
+  clear: both;
+}
+
+.measurement {
+  position: relative;
+  width: 500px;
+  margin: 5px 0;
+  padding: 10px 10px 10px;
+  background-color: @bg-color;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  display: block;
+  float: left;
+  clear: both;
+}
+
+.measurement .value {
+  font-weight: bold;
+  font-size: 14px;
+  float: left;
+}
+
+.measurement .current {
+  font-size: 42px;
+  float: left;
+}
+
+.measurement .unit {
+  color: #777;
+  float: left;
+  margin-top: 7px;
+  font-size: 20px;
+}
+
+.measurement .date {
+  float: right;
+  margin-top: 17px;
+  padding-left: 15px;
+}
+
+.measurement .detail {
+  float: left;
+}
+
+.chart-link {
+  float: right;
+  padding-right: 15px;
+}

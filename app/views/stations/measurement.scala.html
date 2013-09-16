@@ -1,0 +1,5 @@
+@(measurement: Measurement)
+
+<div class="measurement">
+  <div class="current value">@measurement.current</div> <div class="unit">@Messages(measurement.measurementType + "_unit")</div> <div class="date">@measurement.date.format("HH:mm EEEE")</div>
+</div>

@@ -1,0 +1,43 @@
+title=Hydroapp
+title.stations=Station List
+title.station=Station {0}
+signup=Signup
+email=Email
+password=Password
+password.retype=Retype your password
+firstName=First name
+lastName=Last name
+
+no.station=No station selected
+no.chart=
+loading.data=Loading data...
+
+at=at
+
+measurement=Measurement
+date=Date
+current=Current Value
+minus24=-24h
+delta24=Δ24h
+mean24=Mean 24h
+max24=Max 24h
+min24=Min 24h
+
+measuringStation=Measuring station
+
+FLOW_M3_S=water flow
+FLOW_L_S=water flow
+WATER_LEVEL_ABOVE_SEA_LEVEL=m above sea level
+WATER_LEVEL_IN_M=water level
+TEMPERATURE=temperature
+
+FLOW_M3_S_unit=m³/s
+FLOW_L_S_unit=l/s
+WATER_LEVEL_ABOVE_SEA_LEVEL_unit=m above sea level
+WATER_LEVEL_IN_M_unit=m
+TEMPERATURE_unit=°C
+
+search.placeholder=Filter...
+search.button=Filter
+
+chartlink=Display chart

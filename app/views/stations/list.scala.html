@@ -1,0 +1,23 @@
+@(favorites: Seq[FavMeasuringStation], stations: Seq[FavMeasuringStation])
+
+<div id="station-lists">
+	@if(favorites.nonEmpty) {
+		<ul>
+		@favorites.map { s =>
+		  <li class="station-element">
+			<a class="station-link" href="@routes.Stations.get(s.station.id)">@s.station.name</a>
+			<a class="fav fav-on" href="@routes.Favourites.toggle(s.station.id)">&nbsp;</a>
+		  </li>
+		}
+		</ul>
+	}
+	
+	<ul>
+	@stations.map { s =>
+	  <li class="station-element">
+		<a class="station-link" href="@routes.Stations.get(s.station.id)">@s.station.name</a>
+		<a class="fav fav-off" href="@routes.Favourites.toggle(s.station.id)">&nbsp;</a>
+	  </li>
+	}
+	</ul>
+</div>

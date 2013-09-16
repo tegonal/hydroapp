@@ -1,0 +1,48 @@
+@(currentFilter: String, form: Form[(String,String)])(implicit header: Header, flash: Flash)
+
+@main(Messages("title")) {
+  <div class="top-bar">
+    <div class="search-form">
+    @helper.form(action = routes.Application.index(), 'class -> "form-inline") {
+      <div class="form-group">
+        <input type="search" id="searchField" class="form-control" name="filter" value="@currentFilter" placeholder="@Messages("search.placeholder")" autocomplete="off">
+      </div>
+      <input type="submit" id="filterButton" value="@Messages("search.button")" class="btn btn-primary">
+    }
+    </div>
+    @header.user.map { user =>
+      <div class="logged-in">
+        <img class="img-thumbnail user-thumbnail" alt="" src="http://www.gravatar.com/avatar/@play.api.libs.Codecs.md5(user.trim.toLowerCase.getBytes)?s=32" />
+        <div class="username">@user</div>
+        <a href="@routes.Auth.logout" class="btn btn-primary">@Messages("logout")</a>
+      </div>
+    }.getOrElse{
+      <div id="login-form">
+        @login(form)
+      </div>
+    }
+    <div id="messages">
+      @form.globalError.map { error =>
+        <div class="error">@error.message</div>
+      } @flash.get("success").map { message =>
+        <div class="success">@message</div>
+      }
+    </div>
+    <div class="top-logo"></div>
+  </div>
+  
+  <div id="main-container">
+    <div id="stations">
+      @Messages("loading.data")
+    </div>
+    
+    <div id="station-container">
+      @Messages("no.station")
+    </div>
+    
+    <div id="chart-container">
+      @Messages("no.chart")
+    </div>
+  </div>
+  <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+}

@@ -1,0 +1,14 @@
+@(form: Form[(String,String)])
+
+@helper.form(routes.Auth.authenticate, 'class -> "form-inline pull-left") {
+
+  <div class="form-group">
+    <input type="email" class="form-control" name="email" placeholder="@Messages("email")" id="email" value="@form("email").value">
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" name="password" id="password" placeholder="@Messages("password")">
+  </div>
+  <input class="btn" type="submit" id="loginbutton" value="@Messages("login")">
+}
+
+<a id="signup-button" data-remote="@routes.Users.signup" data-toggle="modal" href="#" data-target="#signUpModal" class="btn btn-primary">@Messages("signup")</a>

@@ -1,0 +1,54 @@
+@(signupForm: Form[User])
+
+@import helper._
+
+@main(Messages("title")) {
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">x</button>
+      <h4 class="modal-title">@Messages("signup")</h4>
+    </div>
+    <div class="modal-body">
+      @helper.form(action = routes.Users.create) {
+      	
+      <fieldset>
+        <div class="form-group">
+        @inputText(
+          signupForm("email"), '_label -> Messages("email"), 'class -> "form-control"
+        )
+        </div>
+      
+        <div class="form-group">
+        @inputPassword(
+          signupForm("password.main"), '_label -> Messages("password"), 'class -> "form-control"
+        )
+        </div>
+      
+        <div class="form-group">
+        @inputPassword(
+          signupForm("password.confirm"), '_label -> Messages("password.retype"), 'class -> "form-control", '_error -> signupForm.error("password")
+        )
+        </div>
+      
+        <div class="form-group">
+        @inputText(
+          signupForm("firstName"), '_label -> Messages("firstName"), 'class -> "form-control"
+        )
+      
+        <div class="form-group">
+        @inputText(
+          signupForm("lastName"), '_label -> Messages("lastName"), 'class -> "form-control"
+        )
+        </div>
+      </fieldset>
+      
+      <div class="actions">
+          <input type="submit" class="btn primary" value="@Messages("signup")" >
+      </div>
+      
+      }
+    </div>
+  </div>
+</div>
+}
