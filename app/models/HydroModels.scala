@@ -12,13 +12,13 @@ object Measurement {
   implicit val measurementFormat = Json.format[Measurement]
 }
 
-case class MeasuringStation(measuringStationId: Int, name: String, measurements: Seq[Measurement])
+case class MeasuringStation(stationId: Int, name: String, measurements: Seq[Measurement])
 
 object MeasuringStation {
   implicit val measuringStationFormat = Json.format[MeasuringStation]
 }
 
-case class SimpleMeasuringStation(id: Int, name: String)
+case class SimpleMeasuringStation(stationId: Int, name: String)
 
 case class FavMeasuringStation(station: SimpleMeasuringStation, isFavourite: Boolean = false)
 

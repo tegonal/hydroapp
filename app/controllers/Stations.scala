@@ -21,43 +21,43 @@ trait StationsController extends Controller {
 
   val historyTypes = List(TEMP, FLOW)
 
-  def get(id: Int) =     Action.async {
-      retrieveStation(id).map {
-        case Some(station) => Ok(views.html.stations.station(station))
-        case None => NotFound
-      }
+  def get(id: Int) = Action.async {
+    retrieveStation(id).map {
+      case Some(station) => Ok(views.html.stations.station(station))
+      case None => NotFound
     }
+  }
 
   def list(filter: String) = Action.async { request =>
-      retrieveStationList(filter).map { list =>
-        val stats = request.session.get(Security.username).map { email =>
-          val favs = models.Favourites.findByEmail(email)
-          list map (s => FavMeasuringStation(s, favs exists (_.stationId == s.id)))
-        }.getOrElse {
-          list map (FavMeasuringStation(_))
-        }
-        val (favourites, stations) = stats partition (_.isFavourite)
-
-        Ok(views.html.stations.list(favourites, stations))
+    retrieveStationList(filter).map { list =>
+      val stats = request.session.get(Security.username).map { email =>
+        val favs = models.Favourites.findByEmail(email)
+        list map (s => FavMeasuringStation(s, favs exists (_.stationId == s.stationId)))
+      }.getOrElse {
+        list map (FavMeasuringStation(_))
       }
+      val (favourites, stations) = stats partition (_.isFavourite)
+
+      Ok(views.html.stations.list(favourites, stations))
+    }
   }
 
   def chart(id: Int, daysInPast: Int) = Action.async {
-      val to = DateTime.now
-      val from = DateTime.now - daysInPast.days
+    val to = DateTime.now
+    val from = DateTime.now - daysInPast.days
 
-      retrieveStationHistory(id, from, to).map { stations =>
+    retrieveStationHistory(id, from, to).map { stations =>
 
-        Ok(Json.obj("cols" -> columns(stations),
-          "rows" -> rows(stations),
-          "options" ->
-            Json.obj("curveType" -> "function", "title" -> "and some time ago...",
-              "hAxis" -> Json.obj("title" -> "Date & Time", "titleTextStyle" -> Json.obj("color" -> "#333")),
-              "vAxes" -> (Json.obj() /: titles)(_ + _),
-              "series" -> Json.obj("1" -> Json.obj("targetAxisIndex" -> "1")))))
+      Ok(Json.obj("cols" -> columns(stations),
+        "rows" -> rows(stations),
+        "options" ->
+          Json.obj("curveType" -> "function", "title" -> "and some time ago...",
+            "hAxis" -> Json.obj("title" -> "Date & Time", "titleTextStyle" -> Json.obj("color" -> "#333")),
+            "vAxes" -> (Json.obj() /: titles)(_ + _),
+            "series" -> Json.obj("1" -> Json.obj("targetAxisIndex" -> "1")))))
 
-      }
     }
+  }
 
   def columns(stations: Seq[MeasuringStation]) = {
     Json.obj("id" -> "date", "label" -> Messages("timeofmeasurement"), "type" -> "datetime") +:

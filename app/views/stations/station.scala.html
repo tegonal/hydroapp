@@ -1,8 +1,8 @@
 @(measuringStation: MeasuringStation)
 
 <div class="station">
-  <h2>@measuringStation.name (@measuringStation.measuringStationId)</h2>
-  <a href="@routes.Stations.chart(measuringStation.measuringStationId, 30)" class="chart-link">@Messages("chartlink")</a>
+  <h2>@measuringStation.name (@measuringStation.stationId)</h2>
+  <a href="@routes.Stations.chart(measuringStation.stationId, 30)" class="chart-link">@Messages("chartlink")</a>
   @measuringStation.measurements.map { m =>
     @measurement(m)
   }
