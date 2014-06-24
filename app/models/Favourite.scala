@@ -9,30 +9,34 @@ import org.joda.time.DateTime
 
 case class Favourite(email: String, stationId: Int)
 
-object Favourites extends Table[Favourite]("FAVOURITES") {
+class Favourites(tag: Tag) extends Table[Favourite](tag, "FAVOURITES") {
   def email = column[String]("EMAIL")
   def stationId = column[Int]("STATION_ID")
 
-  def * = email ~ stationId <> (Favourite, Favourite.unapply _)
+  def * = (email, stationId) <> (Favourite.tupled, Favourite.unapply _)
 
-  def user = foreignKey("FK_FAV_USER", email, Users)(_.email)
+  def user = foreignKey("FK_FAV_USER", email, Users.users)(_.email)
 
   def idx = index("IDX_FAV_USER_STATION", (email, stationId), unique = true)
+}
+
+object Favourites {
+  val favourites = TableQuery[Favourites]
 
   def create(favourite: Favourite) = DB.withSession { implicit s: Session =>
-    Favourites.insert(favourite)
+    favourites.insert(favourite)
     favourite
   }
 
   def delete(favourite: Favourite) = DB.withSession { implicit s: Session =>
-    Favourites.filter(f => f.email === favourite.email && f.stationId === favourite.stationId).delete > 0
+    favourites.filter(f => f.email === favourite.email && f.stationId === favourite.stationId).delete > 0
   }
   
   def find(favourite: Favourite) = DB.withSession { implicit s: Session =>
-    Query(Favourites).filter(f => f.email === favourite.email && f.stationId === favourite.stationId).firstOption
+    favourites.filter(f => f.email === favourite.email && f.stationId === favourite.stationId).firstOption
   }
 
   def findByEmail(email: String) = DB.withSession { implicit s: Session =>
-    Query(Favourites).filter(_.email === email).list
+    favourites.filter(_.email === email).list
   }
 }
